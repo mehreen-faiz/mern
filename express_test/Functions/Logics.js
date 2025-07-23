@@ -63,12 +63,16 @@ console.log(error.msg)
 res.status(504).json({msg : error.msg})
     }
    },
-   DeleteRecord : async function (req,res) {
+   DeleteRecord : async function(req,res){
     try {
       let {a} = req.params
       let dhondo = await User.findById(a)
       if(!dhondo){
         res.status(404).json({msg:"record does not found"})
+      }
+      else{
+        await User.findByIdAndDelete(dhondo)
+        res.status(201).json({msg:"record deleted"})
       }
     } catch (error) {
       res.status(504).json({msg:error.message})
