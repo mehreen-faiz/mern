@@ -45,9 +45,9 @@ export default function Showdata(){
       await axios.delete(`http://localhost:3003/crud/remove/${id}`).then(()=>{
         toast.success("record deleted successfully");
         Datalao()
-      }).catch((e)=>
+      }).catch((e)=>{
     toast.error(e.message)
-    )
+     } )
     }
   }
  return (
