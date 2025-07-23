@@ -1,6 +1,7 @@
 const User = require("../Collection/User");
 let bb = require("bcrypt");
 let mail = require("nodemailer");
+const { use } = require("react");
 require("dotenv").config()
 
 let secure_info = mail.createTransport({
@@ -61,6 +62,18 @@ let all_func ={
 console.log(error.msg)
 res.status(504).json({msg : error.msg})
     }
+   },
+   DeleteRecord : async function (req,res) {
+    try {
+      let {a} = req.params
+      let dhondo = await User.findById(a)
+      if(!dhondo){
+        res.status(404).json({msg:"record does not found"})
+      }
+    } catch (error) {
+      res.status(504).json({msg:error.message})
+    }
+    
    }
   }
    
